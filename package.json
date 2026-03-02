@@ -1,8 +1,15 @@
 {
   "name": "home-server",
   "version": "1.0.0",
-  "description": "Trying to make a room ecosystem + server for fun",
-  "keywords": [],
+  "description": "home server backend",
+  "homepage": "https://github.com/hardik-mirg/local-server#readme",
+  "bugs": {
+    "url": "https://github.com/hardik-mirg/local-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hardik-mirg/local-server.git"
+  },
   "license": "ISC",
   "author": "Hardik Mirg",
   "type": "commonjs",
@@ -11,9 +18,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "bcryptjs": "^3.0.3",
-    "dotenv": "^17.2.4",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3"
+    "nedb-promises": "^6.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

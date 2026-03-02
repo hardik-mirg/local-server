@@ -1,0 +1,33 @@
+{
+  "sensors": [
+    "bmi160 ACCELEROMETER",
+    "af6133 MAGNETOMETER",
+    "ORIENTATION",
+    "bmi160 GYROSCOPE",
+    "stk33502 LIGHT",
+    "stk33502 PROXIMITY",
+    "UNCALI_MAG",
+    "UNCALI_GYRO",
+    "SIGNIFICANT_MOTION",
+    "STEP_DETECTOR",
+    "STEP_COUNTER",
+    "WAKE_GESTURE",
+    "GLANCE_GESTURE",
+    "PICK_UP",
+    "DEVICE_ORIENTATION",
+    "STATIONARY_DETECT",
+    "UNCALI_ACC",
+    "STEP_DETECTOR_WAKEUP",
+    "CAMERA_PROTECT",
+    "FREE_FALL",
+    "PICKUP_DETECT",
+    "LUX_AOD",
+    "PEDO_MINUTE",
+    "Game Rotation Vector Sensor",
+    "GeoMag Rotation Vector Sensor",
+    "Gravity Sensor",
+    "Linear Acceleration Sensor",
+    "Rotation Vector Sensor",
+    "Orientation Sensor"
+  ]
+}

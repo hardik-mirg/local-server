@@ -1,13 +1,2 @@
-# Dependency folders (too big for GitHub)
-node_modules/
-
-# Secrets (NEVER upload your .env file!)
+/node_modules
 .env
-.env.local
-
-# Logs
-*.log
-npm-debug.log*
-
-# OS specific files
-.DS_Store
