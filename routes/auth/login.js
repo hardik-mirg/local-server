@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     
     try {
         const user = await usersDb.findOne({username, password})
-        if (user) return res.status(200).json({message: "user authorized", user: {username: user.username, name:user.name}})
+        if (user) return res.status(200).json({message: "user authorized", user: {username: user.username, name:user.name, id: user._id}})
         
         return res.status(401).json({error: "username or password incorrect"})
     } catch (err) {

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const exec = require('../../../execute')
+const exec = require('../../../scripts/execute')
 
 
 const command = `

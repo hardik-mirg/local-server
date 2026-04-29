@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const execute = require('../../../execute')
+const execute = require('../../../scripts/execute')
 
 router.get('/', async (req, res) => {
 
