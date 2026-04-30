@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 const askLLM = require('../scripts/askLLM')
+const IoTRAG = require('../scripts/IoTRAG')
 const tts = require('../scripts/tts')
 const playAudio = require('../scripts/playAudio')
 
@@ -16,6 +17,8 @@ router.get('/toggle/:state', (req, res) => {
 });
 
 router.post('/command', async (req, res) => {
+    res.status(200).send('ok')
+    
     const esp32Socket = req.app.get('esp32')
     try {
         let cmd = req.body.command[0].toLowerCase()
@@ -23,27 +26,39 @@ router.post('/command', async (req, res) => {
         if (cmd.startsWith('hey server')) {
             
             playAudio('~/home-server/assets/ai_voice_start.mp3')
-            if (cmd.includes('lights on')) {
-                tts('turning lights on')
+            if (cmd.includes('on') && cmd.includes('light')){
+                tts('lights turned on')
                 esp32Socket.send(1)
             }
-            else if (cmd.includes('lights off')) {
-                tts('turning lights off')
+            else if (cmd.includes('off') && cmd.includes('light')) {
+                tts('lights turned off')
                 esp32Socket.send(0)
             }
             else {
-                const prompt = `Device commands → JSON. Other text → short reply.
+                const prompt = `Respond in ONE of these formats:
+
+{"action":"lights on"}
+{"tool":"getWeather","arg":"mumbai"}
+hello
+
+Rules:
+- Output EXACTLY one format
+- JSON must be complete and valid
+- No extra text
+- If unsure, reply in plain text
+- If tool result is present, DO NOT use tools. Reply in plain text.
 
 Actions: lights on, lights off, fan on, fan off
+Tools: getDateTime, getCity, getWeather
 
-Only output JSON if clearly a command. If unsure, reply normally.
-
+Examples:
 turn on lights → {"action":"lights on"}
-switch off fan → {"action":"fan off"}
-hello → Hi
+weather in mumbai → {"tool":"getWeather","arg":"mumbai"}
+Tool result: Mumbai: ☀️ +32°C → It's 32°C and sunny in Mumbai
+hello → hi
 
-${cmd.slice(11)} →`;
-                const LLM_Res = await askLLM(prompt)
+user: ${cmd.slice(11)} →`
+                const LLM_Res = await IoTRAG(prompt)
                 playAudio('~/home-server/assets/ding.mp3')
                 tts(LLM_Res)
                 console.log(LLM_Res)
@@ -63,7 +78,6 @@ ${cmd.slice(11)} →`;
 
     }
 
-    res.status(200).send('ok')
 })
 
 module.exports = router;
